@@ -18,14 +18,15 @@ public class SpawnMechanism : MonoBehaviour {
 	
 	IEnumerator SpawnDiscs() {
 		while (true) {
-			yield return new WaitForSeconds(Random.Range (0.2f, 0.6f));
+			yield return new WaitForSeconds(Random.Range (0.6f, 1.8f));
 			SpawnDiscInRandomPos();
 		}
 	}
 
-	void SpawnDiscInRandomPos() {
+	GameObject SpawnDiscInRandomPos() {
 		int rng = Random.Range(0,3);
 		GameObject disc = (rng == 0) ? SpawnDiscInLeft() : (rng == 1) ? SpawnDiscInMid() : SpawnDiscInRight();
+		return disc;
 	}
 
 	GameObject SpawnDiscInLeft() {

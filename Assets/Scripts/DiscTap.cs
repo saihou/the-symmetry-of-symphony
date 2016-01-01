@@ -6,6 +6,8 @@ public class DiscTap : MonoBehaviour {
 	GameObject original;
 
 	void OnMouseDown() {
+		GameManager.instance.KilledOne();
+
 		Destroy(original);
 		Destroy(gameObject);
 	}
