@@ -9,10 +9,12 @@ public class DiscTap : MonoBehaviour {
 		if (GameManager.instance.IsInPlay()) {
 			GameManager.instance.KilledOne();
 
-			DiscExplode explode = original.GetComponent<DiscExplode>();
-			explode.ExplodeBlue();
-
+			DiscExplode explodeBlue = original.GetComponent<DiscExplode>();
+			explodeBlue.ExplodeBlue();
 			Destroy(original);
+
+			DiscExplode explodeYellow = gameObject.GetComponent<DiscExplode>();
+			explodeYellow.ExplodeYellow();
 			Destroy(gameObject);
 		}
 	}
