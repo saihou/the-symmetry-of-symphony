@@ -8,6 +8,8 @@ public class DiscTap : MonoBehaviour {
 	void OnMouseDown() {
 		GameManager.instance.KilledOne();
 
+		DiscExplode explode = original.GetComponent<DiscExplode>();
+		explode.ExplodeBlue();
 		Destroy(original);
 		Destroy(gameObject);
 	}

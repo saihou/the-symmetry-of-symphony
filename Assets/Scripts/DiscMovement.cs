@@ -13,9 +13,14 @@ public class DiscMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//reached the bottom
 		if (gameObject.transform.position.y < 0) {
 			GameManager.instance.MissedOne();
 			Handheld.Vibrate();
+			DiscExplode explode = GetComponent<DiscExplode>();
+			if (explode != null) {
+				explode.ExplodeRed();
+			}
 			Destroy(gameObject);
 		}
 		gameObject.transform.position = gameObject.transform.position + speed*Vector3.down;
