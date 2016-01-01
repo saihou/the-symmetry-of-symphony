@@ -4,6 +4,7 @@ using System.Collections;
 public class SpawnMechanism : MonoBehaviour {
 
 	public GameObject disc;
+	public GameObject discClone;
 	
 	// Use this for initialization
 	void Start () {
@@ -28,14 +29,23 @@ public class SpawnMechanism : MonoBehaviour {
 	}
 
 	GameObject SpawnDiscInLeft() {
-		return GameObject.Instantiate(disc, SpawnPositions.instance.GetPos(DiscSpawnPoints.LEFT), Quaternion.identity) as GameObject;
+		GameObject a = GameObject.Instantiate(disc, SpawnPositions.instance.GetPos(DiscSpawnPoints.LEFT), Quaternion.identity) as GameObject;
+		GameObject b = GameObject.Instantiate(discClone, SpawnPositions.instance.GetClonePos(DiscSpawnPoints.LEFT), Quaternion.identity) as GameObject;
+		b.GetComponent<DiscTap>().SetOriginalDisc(a);
+		return b;
 	}
 
 	GameObject SpawnDiscInMid() {
-		return GameObject.Instantiate(disc, SpawnPositions.instance.GetPos(DiscSpawnPoints.MID), Quaternion.identity) as GameObject;
+		GameObject a = GameObject.Instantiate(disc, SpawnPositions.instance.GetPos(DiscSpawnPoints.MID), Quaternion.identity) as GameObject;
+		GameObject b =  GameObject.Instantiate(discClone, SpawnPositions.instance.GetClonePos(DiscSpawnPoints.MID), Quaternion.identity) as GameObject;
+		b.GetComponent<DiscTap>().SetOriginalDisc(a);
+		return b;
 	}
 
 	GameObject SpawnDiscInRight() {
-		return GameObject.Instantiate(disc, SpawnPositions.instance.GetPos(DiscSpawnPoints.RIGHT), Quaternion.identity) as GameObject;
+		GameObject a = GameObject.Instantiate(disc, SpawnPositions.instance.GetPos(DiscSpawnPoints.RIGHT), Quaternion.identity) as GameObject;
+		GameObject b =  GameObject.Instantiate(discClone, SpawnPositions.instance.GetClonePos(DiscSpawnPoints.RIGHT), Quaternion.identity) as GameObject;
+		b.GetComponent<DiscTap>().SetOriginalDisc(a);
+		return b;
 	}
 }

@@ -2,7 +2,15 @@
 using System.Collections;
 
 public class DiscTap : MonoBehaviour {
-	void OnMouseDown() {	
+
+	GameObject original;
+
+	void OnMouseDown() {
+		Destroy(original);
 		Destroy(gameObject);
+	}
+
+	public void SetOriginalDisc(GameObject orig) {
+		original = orig;
 	}
 }

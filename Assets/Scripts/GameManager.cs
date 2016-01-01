@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour {
 
 	public static GameManager instance;
 
-	protected int lives = 3;
+	protected int lives = 10;
 
 	void Awake () {
 		instance = this;
@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void MissedOne() {
+		Debug.Log (lives);
 		lives--;
 	}
 }
