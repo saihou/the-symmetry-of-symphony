@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour {
 	protected int lives = 10;
 	protected int score = 0;
 
+	bool inPlay = true;
+
 	void Awake () {
 		instance = this;
 	}
@@ -24,8 +26,13 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (lives <= 0) {
-			Debug.Log ("Game Over!!!!");
+		if (!inPlay) return;
+
+		if (Input.touchCount > 0) {
+			Touch touch = Input.GetTouch(0);
+			if (touch.phase == TouchPhase.Began && touch.position.x < Screen.width/2) {
+				DisplayInfoBox("Play only on the right side!");
+			}
 		}
 	}
 
@@ -33,6 +40,10 @@ public class GameManager : MonoBehaviour {
 		lives--;		
 		lifeText.text = lives.ToString();
 		StartCoroutine(FlashGameObject(fadeWhenHit.gameObject, 0.05f));
+
+		if (lives <= 0) {
+			GameOver();
+		}
 	}
 
 	public void KilledOne() {
@@ -53,7 +64,23 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void GameOver() {
+		inPlay = false;
+
+		infoBox.gameObject.SetActive(true);
 		Text infoBoxText = infoBox.GetComponentInChildren<Text>();
 		infoBoxText.text = "GAME OVER";
+
+		//set all child to active
+		foreach (Transform t in infoBox.gameObject.transform) {
+			t.gameObject.SetActive(true);
+		}
+	}
+
+	public void Restart() {
+		Application.LoadLevel(0);
+	}
+
+	public void Quit() {
+		Application.Quit();
 	}
 }
