@@ -17,7 +17,7 @@ public class SpawnMechanism : MonoBehaviour {
 	}
 	
 	IEnumerator SpawnDiscs() {
-		while (true) {
+		while (GameManager.instance.IsInPlay()) {
 			yield return new WaitForSeconds(Random.Range (0.2f, 0.6f));
 			SpawnDiscInRandomPos();
 		}
@@ -33,6 +33,7 @@ public class SpawnMechanism : MonoBehaviour {
 		GameObject a = GameObject.Instantiate(disc, SpawnPositions.instance.GetPos(DiscSpawnPoints.LEFT), Quaternion.identity) as GameObject;
 		GameObject b = GameObject.Instantiate(discClone, SpawnPositions.instance.GetClonePos(DiscSpawnPoints.LEFT), Quaternion.identity) as GameObject;
 		b.GetComponent<DiscTap>().SetOriginalDisc(a);
+		b.GetComponent<Renderer>().enabled = GameManager.instance.GetCloneVisibility();
 		return b;
 	}
 
@@ -40,6 +41,7 @@ public class SpawnMechanism : MonoBehaviour {
 		GameObject a = GameObject.Instantiate(disc, SpawnPositions.instance.GetPos(DiscSpawnPoints.MID), Quaternion.identity) as GameObject;
 		GameObject b =  GameObject.Instantiate(discClone, SpawnPositions.instance.GetClonePos(DiscSpawnPoints.MID), Quaternion.identity) as GameObject;
 		b.GetComponent<DiscTap>().SetOriginalDisc(a);
+		b.GetComponent<Renderer>().enabled = GameManager.instance.GetCloneVisibility();
 		return b;
 	}
 
@@ -47,6 +49,7 @@ public class SpawnMechanism : MonoBehaviour {
 		GameObject a = GameObject.Instantiate(disc, SpawnPositions.instance.GetPos(DiscSpawnPoints.RIGHT), Quaternion.identity) as GameObject;
 		GameObject b =  GameObject.Instantiate(discClone, SpawnPositions.instance.GetClonePos(DiscSpawnPoints.RIGHT), Quaternion.identity) as GameObject;
 		b.GetComponent<DiscTap>().SetOriginalDisc(a);
+		b.GetComponent<Renderer>().enabled = GameManager.instance.GetCloneVisibility();
 		return b;
 	}
 }

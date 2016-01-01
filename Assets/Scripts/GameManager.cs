@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour {
 	protected int score = 0;
 
 	bool inPlay = true;
+	bool clonesVisible = true;
+	float clonesVisibleFor = 7.0f; //visible for first 7 seconds
 
 	void Awake () {
 		instance = this;
@@ -22,6 +24,7 @@ public class GameManager : MonoBehaviour {
 	void Start() {
 		lifeText.text = lives.ToString();
 		scoreText.text = score.ToString();
+		Invoke ("FadeAllDiscClones", clonesVisibleFor);
 	}
 	
 	// Update is called once per frame
@@ -37,13 +40,14 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void MissedOne() {
-		lives--;		
-		lifeText.text = lives.ToString();
-		StartCoroutine(FlashGameObject(fadeWhenHit.gameObject, 0.05f));
-
+		lives--;
 		if (lives <= 0) {
 			GameOver();
+			lives = 0;
 		}
+
+		lifeText.text = lives.ToString();
+		StartCoroutine(FlashGameObject(fadeWhenHit.gameObject, 0.05f));
 	}
 
 	public void KilledOne() {
@@ -82,5 +86,22 @@ public class GameManager : MonoBehaviour {
 
 	public void Quit() {
 		Application.Quit();
+	}
+
+	void FadeAllDiscClones() {
+		SlowlyFadeAway fadeScript = GetComponent<SlowlyFadeAway>();
+		fadeScript.SlowlyFadeAllDiscClones();
+	}
+
+	public bool GetCloneVisibility() {
+		return clonesVisible;
+	}
+
+	public void SetCloneVisibility(bool v) {
+		clonesVisible = v;
+	}
+
+	public bool IsInPlay() {
+		return inPlay;
 	}
 }
