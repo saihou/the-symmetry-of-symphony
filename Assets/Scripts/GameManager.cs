@@ -3,15 +3,22 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
-	public GameObject disc;
+	public static GameManager instance;
 
-	// Use this for initialization
-	void Start () {
-		GameObject d = GameObject.Instantiate(disc);
+	protected int lives = 3;
+
+	void Awake () {
+		instance = this;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if (lives <= 0) {
+			print ("Game Over!!!!");
+		}
+	}
+
+	public void MissedOne() {
+		lives--;
 	}
 }

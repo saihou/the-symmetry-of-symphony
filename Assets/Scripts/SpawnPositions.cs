@@ -22,7 +22,7 @@ public class SpawnPositions : MonoBehaviour {
 	
 	}
 
-	Vector3 GetPos(DiscSpawnPoints dsp) {
+	public Vector3 GetPos(DiscSpawnPoints dsp) {
 		switch (dsp) {
 			case DiscSpawnPoints.LEFT: return left;
 			case DiscSpawnPoints.MID: return mid;
@@ -32,4 +32,4 @@ public class SpawnPositions : MonoBehaviour {
 	}
 }
 
-enum DiscSpawnPoints { LEFT, MID, RIGHT };
+public enum DiscSpawnPoints { LEFT, MID, RIGHT };
