@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
 	public static GameManager instance;
 	public Text lifeText;
 	public Text scoreText;
+	public Image fadeWhenHit;
 
 	protected int lives = 10;
 	protected int score = 0;
@@ -29,11 +30,18 @@ public class GameManager : MonoBehaviour {
 
 	public void MissedOne() {
 		lives--;		
-		lifeText.text = "Lives left: " + lives;
+		lifeText.text = lives.ToString();
+		StartCoroutine(FlashRedScreen());
 	}
 
 	public void KilledOne() {
 		score = score + 2;
 		scoreText.text = score.ToString();
+	}
+
+	IEnumerator FlashRedScreen() {
+		fadeWhenHit.gameObject.SetActive(true);
+		yield return new WaitForSeconds(0.1f);
+		fadeWhenHit.gameObject.SetActive(false);
 	}
 }

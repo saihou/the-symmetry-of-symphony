@@ -18,7 +18,7 @@ public class SpawnMechanism : MonoBehaviour {
 	
 	IEnumerator SpawnDiscs() {
 		while (true) {
-			yield return new WaitForSeconds(Random.Range (0.6f, 1.8f));
+			yield return new WaitForSeconds(Random.Range (0.2f, 0.6f));
 			SpawnDiscInRandomPos();
 		}
 	}

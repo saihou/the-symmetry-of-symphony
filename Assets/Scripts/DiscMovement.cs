@@ -15,6 +15,7 @@ public class DiscMovement : MonoBehaviour {
 	void Update () {
 		if (gameObject.transform.position.y < 0) {
 			GameManager.instance.MissedOne();
+			Handheld.Vibrate();
 			Destroy(gameObject);
 		}
 		gameObject.transform.position = gameObject.transform.position + speed*Vector3.down;
