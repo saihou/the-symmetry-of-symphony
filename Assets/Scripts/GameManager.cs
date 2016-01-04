@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour {
 	bool clonesVisible = true;
 	float clonesVisibleFor = 7.0f; //visible for first 7 seconds
 
+
 	int currentId = 0;
 	int latestId = 0;
 
@@ -127,13 +128,16 @@ public class GameManager : MonoBehaviour {
 		return inPlay;
 	}
 
-	public bool CanDestroy(int discId) {
+	/*public bool CanDestroy(int discId) {
 		if (currentId == discId) {
+			return true;
+		} else if (currentId < discId && justLostLife) {
+			currentId = discId;
 			return true;
 		} else {
 			return false;
 		}
-	}
+	}*/
 
 	public void DiscDestroyed() {
 		currentId++;
@@ -142,4 +146,10 @@ public class GameManager : MonoBehaviour {
 	public int GetDiscId() {
 		return latestId++;
 	}
+
+	/*void ResetJustLostLife() {
+		if (justLostLife) {
+			justLostLife = false;
+		}
+	}*/
 }

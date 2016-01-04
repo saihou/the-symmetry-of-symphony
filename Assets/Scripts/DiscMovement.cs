@@ -17,6 +17,7 @@ public class DiscMovement : MonoBehaviour {
 				explode.ExplodeRed();
 			}
 			Destroy(gameObject);
+			GameManager.instance.DiscDestroyed();
 		}
 		gameObject.transform.position = gameObject.transform.position + speed*Vector3.down;
 	}

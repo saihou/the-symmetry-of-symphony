@@ -7,7 +7,7 @@ public class DiscTap : MonoBehaviour {
 	int id;
 
 	void OnMouseDown() {
-		if (GameManager.instance.IsInPlay() && GameManager.instance.CanDestroy(id)) {
+		if (GameManager.instance.IsInPlay()) {
 			GameManager.instance.KilledOne();
 
 			DiscExplode explodeBlue = original.GetComponent<DiscExplode>();
