@@ -9,7 +9,7 @@ public class SlowlyFadeAway : MonoBehaviour {
 
 	public void SlowlyFadeAllDiscClones() {
 		allDiscClones = GameObject.FindGameObjectsWithTag("DiscClone");
-		Invoke ("StopFading", duration);
+		Invoke ("Disappear", duration);
 	}
 
 	void Update() {
@@ -42,7 +42,7 @@ public class SlowlyFadeAway : MonoBehaviour {
 		}
 	}
 
-	void StopFading() {
+	void Disappear() {
 		stop = true;
 	}
 }

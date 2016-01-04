@@ -3,13 +3,8 @@ using System.Collections;
 
 public class DiscMovement : MonoBehaviour {
 
-	float speed = 0.025f;
-	float defaultSpeed = 0.025f;
-
-	// Use this for initialization
-	void Start () {
-	
-	}
+	float speed = 0.03f;
+	float defaultSpeed = 0.03f;
 	
 	// Update is called once per frame
 	void Update () {
@@ -28,7 +23,7 @@ public class DiscMovement : MonoBehaviour {
 
 	// Between 0.025f to 0.25f
 	public void SetSpeed(float newSpeed) {
-		if (newSpeed < 0.025f) newSpeed = 0.025f;
+		if (newSpeed < 0.03f) newSpeed = 0.03f;
 		if (newSpeed > 0.25f) newSpeed = 0.25f;
 		speed = newSpeed;
 	}

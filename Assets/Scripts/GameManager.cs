@@ -13,9 +13,14 @@ public class GameManager : MonoBehaviour {
 	protected int lives = 10;
 	protected int score = 0;
 
+	SpawnMechanism spawnBoss;
+
 	bool inPlay = true;
 	bool clonesVisible = true;
 	float clonesVisibleFor = 7.0f; //visible for first 7 seconds
+
+	int currentId = 0;
+	int latestId = 0;
 
 	void Awake () {
 		instance = this;
@@ -24,6 +29,7 @@ public class GameManager : MonoBehaviour {
 	void Start() {
 		lifeText.text = lives.ToString();
 		scoreText.text = score.ToString();
+		spawnBoss = GetComponent<SpawnMechanism>();
 		Invoke ("FadeAllDiscClones", clonesVisibleFor);
 	}
 	
@@ -53,6 +59,22 @@ public class GameManager : MonoBehaviour {
 	public void KilledOne() {
 		score = score + 2;
 		scoreText.text = score.ToString();
+
+		if (score < 50) {
+			//default starting values
+			spawnBoss.SetMinDelay(0.6f);
+			spawnBoss.SetMaxDelay(0.8f);
+		} else if (score < 100) {
+			spawnBoss.SetMinDelay(0.5f);
+		} else if (score < 200) {
+			spawnBoss.SetMinDelay(0.35f);
+			spawnBoss.SetMaxDelay(0.6f);
+		} else if (score < 300) {
+			spawnBoss.SetMinDelay(0.2f);
+			spawnBoss.SetMaxDelay(0.4f);
+		} else {
+			spawnBoss.SetMaxDelay(0.3f);
+		}
 	}
 
 	IEnumerator FlashGameObject(GameObject go, float duration) {
@@ -103,5 +125,21 @@ public class GameManager : MonoBehaviour {
 
 	public bool IsInPlay() {
 		return inPlay;
+	}
+
+	public bool CanDestroy(int discId) {
+		if (currentId == discId) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public void DiscDestroyed() {
+		currentId++;
+	}
+
+	public int GetDiscId() {
+		return latestId++;
 	}
 }
