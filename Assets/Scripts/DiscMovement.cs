@@ -6,9 +6,6 @@ public class DiscMovement : MonoBehaviour {
 	public static float speed = 0.03f;
 	float defaultSpeed = 0.03f;
 
-	void Start() {
-		Debug.Log (speed);
-	}
 	// Update is called once per frame
 	void Update () {
 		//reached the bottom

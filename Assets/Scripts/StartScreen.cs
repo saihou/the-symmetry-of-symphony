@@ -3,6 +3,12 @@ using System.Collections;
 
 public class StartScreen : MonoBehaviour {
 
+	void Update() {
+		if (Application.platform == RuntimePlatform.Android && Input.GetKey(KeyCode.Escape))
+		{
+			Application.Quit();
+		}
+	}
 	public void OnBtnClickEasy() {
 		DiscMovement.speed = 0.03f;
 		Application.LoadLevel(1);

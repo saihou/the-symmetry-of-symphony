@@ -36,7 +36,13 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!inPlay) return;
+		if (!inPlay) {
+			if (Application.platform == RuntimePlatform.Android && Input.GetKey(KeyCode.Escape))
+			{
+				Application.LoadLevel(0);
+			}
+			return;
+		}
 
 		if (Input.touchCount > 0) {
 			Touch touch = Input.GetTouch(0);
