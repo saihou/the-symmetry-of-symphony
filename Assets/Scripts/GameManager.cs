@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour {
 
 	bool inPlay = true;
 	bool clonesVisible = true;
+	bool pause = false;
 	float clonesVisibleFor = 7.0f; //visible for first 7 seconds
 
 
@@ -29,10 +30,10 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Start() {
-		lifeText.text = lives.ToString();
+		lifeText.text  = lives.ToString();
 		scoreText.text = score.ToString();
-		spawnBoss = GetComponent<SpawnMechanism>();
-		Invoke ("FadeAllDiscClones", clonesVisibleFor);
+		spawnBoss      = GetComponent<SpawnMechanism>();
+		ShowTutorial();
 	}
 	
 	// Update is called once per frame
@@ -146,6 +147,10 @@ public class GameManager : MonoBehaviour {
 		}
 	}*/
 
+	public bool IsGamePaused() {
+		return pause;
+	}
+
 	public void DiscDestroyed() {
 		currentId++;
 	}
@@ -154,6 +159,16 @@ public class GameManager : MonoBehaviour {
 		return latestId++;
 	}
 
+	void ShowTutorial() {
+		bool showTutorial = (PlayerPrefs.GetInt ("Tutorial Done") == 0)? true : false;
+
+		showTutorial = false;
+		if (showTutorial) {
+		} else {
+			Invoke ("FadeAllDiscClones", clonesVisibleFor);
+		}
+		//if no such key (i.e. first time), default value is 0 --> thus, 0 = show tutorial
+	}
 	/*void ResetJustLostLife() {
 		if (justLostLife) {
 			justLostLife = false;
