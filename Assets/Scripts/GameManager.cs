@@ -29,11 +29,10 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Start() {
-		lifeText.text = lives.ToString();
+		lifeText.text  = lives.ToString();
 		scoreText.text = score.ToString();
-		spawnBoss = GetComponent<SpawnMechanism>();
-		Invoke ("FadeAllDiscClones", clonesVisibleFor);
-		//PlayerPrefs.GetInt ("Tutorial Done");
+		spawnBoss      = GetComponent<SpawnMechanism>();
+		ShowTutorial();
 	}
 	
 	// Update is called once per frame
@@ -159,6 +158,16 @@ public class GameManager : MonoBehaviour {
 		return latestId++;
 	}
 
+	void ShowTutorial() {
+		bool showTutorial = (PlayerPrefs.GetInt ("Tutorial Done") == 0)? true : false;
+
+		showTutorial = false;
+		if (showTutorial) {
+		} else {
+			Invoke ("FadeAllDiscClones", clonesVisibleFor);
+		}
+		//if no such key (i.e. first time), default value is 0 --> thus, 0 = show tutorial
+	}
 	/*void ResetJustLostLife() {
 		if (justLostLife) {
 			justLostLife = false;
