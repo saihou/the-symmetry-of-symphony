@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
 
 	bool inPlay = true;
 	bool clonesVisible = true;
+	bool pause = false;
 	float clonesVisibleFor = 7.0f; //visible for first 7 seconds
 
 
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour {
 		scoreText.text = score.ToString();
 		spawnBoss = GetComponent<SpawnMechanism>();
 		Invoke ("FadeAllDiscClones", clonesVisibleFor);
+		//PlayerPrefs.GetInt ("Tutorial Done");
 	}
 	
 	// Update is called once per frame
@@ -144,6 +146,10 @@ public class GameManager : MonoBehaviour {
 			return false;
 		}
 	}*/
+
+	public bool IsGamePaused() {
+		return pause;
+	}
 
 	public void DiscDestroyed() {
 		currentId++;
